@@ -6,6 +6,7 @@ cache/
 .cache*
 /venv
 /env
+.env
 run.sh
 log.txt
 *.pyc
