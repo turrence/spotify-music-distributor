@@ -12,15 +12,16 @@ load_dotenv()
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=SCOPES))
 
 def get_user_playlists():
-    limit, offset = 50
-    playlist_name_id_list = []
+    limit, offset = 50, 0
+    playlist_name_id_list = {}
     current_user_id = sp.current_user()['id']
     sp_dict = sp.current_user_playlists()
     num_playlists = sp_dict['total']
     while len(playlist_name_id_list) < num_playlists:
         for playlist in sp_dict['items']:
-            if playlist['owner']['id'] == current_user_id:    
-                playlist_name_id_list.append((playlist['name'], playlist['id']))
+            # only get playlists that the user owns in the future this could include collaborative playlists
+            if playlist['owner']['id'] == current_user_id: 
+                playlist_name_id_list[playlist['name']] =  playlist['id']
             else:
                 num_playlists -= 1
         offset += limit
@@ -58,9 +59,9 @@ def get_audio_features_from_playlist(playlist_id: str):
     return playlist_features
 
 
-if len(sys.argv) > 1:
-    print(get_audio_features_from_playlist(sys.argv[1]))
-else:
-    print("Whoops, need a username!")
-    print("usage: python user_playlists.py [username]")
-    sys.exit()
+# if len(sys.argv) > 1:
+#     print(get_audio_features_from_playlist(sys.argv[1]))
+# else:
+#     print("Whoops, need a username!")
+#     print("usage: python user_playlists.py [username]")
+#     sys.exit()
