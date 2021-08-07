@@ -5,11 +5,16 @@ import './PlaylistList.css'
 
 function PlaylistList(props){
     // required props
-    // list of playlist names
     return (
         <ListGroup variant="flush">
             {props.playlists.map((playlist) => 
-                <PlaylistListItem key={playlist[1]} playlistName={playlist[0]}></PlaylistListItem>
+                <PlaylistListItem key={playlist[1]} 
+                    playlistData={playlist}
+                    srcPlaylist={props.srcPlaylist} 
+                    clickFunc={props.clickFunc} 
+                    destPlaylists={props.destPlaylists}
+                    isSourceList={props.isSourceList}
+                ></PlaylistListItem>
             )}
         </ListGroup>
     );

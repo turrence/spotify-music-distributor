@@ -55,17 +55,35 @@ const SAMPLE_DATA = {
 }
 
 function PlaylistListContainer({ playlists }) {
+    // lets pass ids
     const [sourcePlaylist, setSourcePlaylist] = useState(null)
     const [destinationPlaylists, setDestinationPlaylists] = useState([])
+
+    function setSource(playlistId){
+        setSourcePlaylist(playlistId)
+        console.log(sourcePlaylist)
+    }
+
+    function setDestination(playlistIds){
+        setDestinationPlaylists(playlistIds)
+    }
 
     return (
         <Container>
             <Row>
                 <Col id="srcList" md={4}>
-                    <PlaylistList  playlists={playlists} setSoruce={setSourcePlaylist} setDests={setDestinationPlaylists}></PlaylistList>
+                    <PlaylistList playlists={playlists} 
+                        srcPlaylist={sourcePlaylist} 
+                        clickFunc={setSource} 
+                        destPlaylists={destinationPlaylists} 
+                        isSourceList={true}></PlaylistList>
                 </Col>
                 <Col id="destList" md={{span:4, offset: 4}}>
-                    <PlaylistList  playlists={playlists} setSoruce={setSourcePlaylist} setDests={setDestinationPlaylists}></PlaylistList>
+                    <PlaylistList playlists={playlists} 
+                        srcPlaylist={sourcePlaylist} 
+                        clickFunc={setDestination} 
+                        destPlaylists={destinationPlaylists} 
+                        isSourceList={false}></PlaylistList>
                 </Col>
             </Row>
         </Container>
