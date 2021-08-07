@@ -1,9 +1,10 @@
 import React from 'react'
-import { ListGroup } from 'react-bootstrap';
+import ListGroup from 'react-bootstrap/ListGroup';
+import './PlaylistListItem.css'
 
-function PlaylistListItem({ name }){
+function PlaylistListItem({ playlistName }){
     return (<ListGroup.Item>
-        {name}
+        {playlistName}
     </ListGroup.Item>)
 }
 

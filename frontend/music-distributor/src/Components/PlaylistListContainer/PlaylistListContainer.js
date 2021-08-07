@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap'
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 import { PlaylistList } from '../components'
+
+import './PlaylistListContainer.css';
 
 const SAMPLE_DATA = {
     "songs i dont skip": "5LdOcWPXDsqq45yjxZUubE",
@@ -50,14 +54,20 @@ const SAMPLE_DATA = {
     "OlderSongs:P": "0XtiOxDXvNJgUBkfdc6FK6"
 }
 
-function PlaylistListContainer() {
+function PlaylistListContainer({ playlists }) {
     const [sourcePlaylist, setSourcePlaylist] = useState(null)
     const [destinationPlaylists, setDestinationPlaylists] = useState([])
 
     return (
         <Container>
-            <PlaylistList class="srcList" playlists={SAMPLE_DATA} setSoruce={setSourcePlaylist} setDests={setDestinationPlaylists}></PlaylistList>
-            <PlaylistList class="destList" playlists={SAMPLE_DATA} setSoruce={setSourcePlaylist} setDests={setDestinationPlaylists}></PlaylistList>
+            <Row>
+                <Col id="srcList" md={4}>
+                    <PlaylistList  playlists={playlists} setSoruce={setSourcePlaylist} setDests={setDestinationPlaylists}></PlaylistList>
+                </Col>
+                <Col id="destList" md={{span:4, offset: 4}}>
+                    <PlaylistList  playlists={playlists} setSoruce={setSourcePlaylist} setDests={setDestinationPlaylists}></PlaylistList>
+                </Col>
+            </Row>
         </Container>
     );
 }

@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {PlaylistListContainer, PlaylistList, PlaylistListItem} from './Components/components'
 
@@ -61,10 +62,9 @@ for(var key in SAMPLE_DATA_DICT){
 // const CONVERTED_DATA = SAMPLE_DATA.items()
 
 function App() {
-  console.log(SAMPLE_DATA_ARR)
   return (
     <div className="App">
-      <PlaylistList playlists={SAMPLE_DATA_ARR}></PlaylistList>
+      <PlaylistListContainer playlists={SAMPLE_DATA_ARR}></PlaylistListContainer>
     </div>
   );
 }
