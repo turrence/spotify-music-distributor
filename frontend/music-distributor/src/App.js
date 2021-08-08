@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import {PlaylistListContainer, PlaylistList, PlaylistListItem} from './Components/components'
+import { PlaylistListContainer } from './Components/components'
 
 const SAMPLE_DATA_DICT = {
   "songs i dont skip": "5LdOcWPXDsqq45yjxZUubE",
