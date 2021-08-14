@@ -20,5 +20,4 @@ export async function send_source_destination_playlists(data){
         }).catch(error => {
             console.error(error)
         });
-
 }
