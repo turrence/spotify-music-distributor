@@ -26,7 +26,7 @@ def get_user_playlists():
                 num_playlists -= 1
         offset += limit
         sp_dict = sp.current_user_playlists(offset=offset)
-    return playlist_name_id_list
+    return [(str(k), str(v)) for k, v in playlist_name_id_list.items()]
 
 # helper function
 def get_song_ids_from_playlist(playlist_id: str):

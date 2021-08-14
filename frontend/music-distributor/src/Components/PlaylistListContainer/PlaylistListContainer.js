@@ -11,6 +11,8 @@ function PlaylistListContainer({ playlists }) {
     const [sourcePlaylist, setSourcePlaylist] = useState("")
     const [destinationPlaylists, setDestinationPlaylists] = useState([])
 
+    console.log(playlists)
+
     function setSource(playlistId){
         setSourcePlaylist(playlistId)
         console.log("src: " + sourcePlaylist)

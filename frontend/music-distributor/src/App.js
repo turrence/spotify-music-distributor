@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import get_playlists from './api';
 import { PlaylistListContainer } from './Components/components'
+import { useEffect, useState } from 'react';
 
 const SAMPLE_DATA_DICT = {
   "songs i dont skip": "5LdOcWPXDsqq45yjxZUubE",
@@ -51,20 +53,30 @@ const SAMPLE_DATA_DICT = {
   "OlderSongs:P": "0XtiOxDXvNJgUBkfdc6FK6"
 }
 
-var SAMPLE_DATA_ARR = []
+// var SAMPLE_DATA_ARR = []
 
-for(var key in SAMPLE_DATA_DICT){
-  if(SAMPLE_DATA_DICT.hasOwnProperty(key)){
-    SAMPLE_DATA_ARR.push([ key, SAMPLE_DATA_DICT[key] ]);
-  }
-}
-
-// const CONVERTED_DATA = SAMPLE_DATA.items()
+// for(var key in SAMPLE_DATA_DICT){
+//   if(SAMPLE_DATA_DICT.hasOwnProperty(key)){
+//     SAMPLE_DATA_ARR.push([ key, SAMPLE_DATA_DICT[key] ]);
+//   }
+// }
 
 function App() {
+  const [playlists , setPlaylists] = useState([]);
+
+  useEffect(() => {
+
+    const api_get_playlists = async () => {
+      const data = await get_playlists()
+      setPlaylists(data)
+    }
+
+    api_get_playlists(playlists);
+  });
+  
   return (
     <div className="App">
-      <PlaylistListContainer playlists={SAMPLE_DATA_ARR}></PlaylistListContainer>
+      <PlaylistListContainer playlists={playlists}></PlaylistListContainer>
     </div>
   );
 }
