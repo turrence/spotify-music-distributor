@@ -1,6 +1,8 @@
 from fastapi import FastAPI
-from spotipy_wrapper import get_user_playlists
 from fastapi.middleware.cors import CORSMiddleware
+
+from schemas import Source_Destinations
+from spotipy_wrapper import get_user_playlists
 import json
 
 app = FastAPI()
@@ -15,6 +17,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+
 @app.get("/")
 async def root():
     return {"message" : "Hello World"}
@@ -23,4 +27,7 @@ async def root():
 def get_all_playlist_ids():
     return get_user_playlists()
 
-
+@app.post("/playlists/source_destinations")
+def receive_source_destination_playlists(src_dests: Source_Destinations):
+    print(src_dests)
+    return src_dests

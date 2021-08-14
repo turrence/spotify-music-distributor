@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import { PlaylistList } from '../components'
+import { PlaylistList, SendPlaylistsButton, ClearPlaylistsButton } from '../components'
 
 import './PlaylistListContainer.css';
 
@@ -11,16 +11,16 @@ function PlaylistListContainer({ playlists }) {
     const [sourcePlaylist, setSourcePlaylist] = useState("")
     const [destinationPlaylists, setDestinationPlaylists] = useState([])
 
-    console.log(playlists)
-
     function setSource(playlistId){
         setSourcePlaylist(playlistId)
         console.log("src: " + sourcePlaylist)
+        console.log(sourcePlaylist === "" && destinationPlaylists.length === 0)
     }
 
     function setDestination(playlistIds){
         setDestinationPlaylists(playlistIds)
         console.log("dest: " + destinationPlaylists)
+        console.log(sourcePlaylist === "" && destinationPlaylists.length === 0)
     }
 
     return (
@@ -34,13 +34,23 @@ function PlaylistListContainer({ playlists }) {
                         destPlaylists={destinationPlaylists} 
                         isSourceList={true}></PlaylistList>
                 </Col>
-                <Col id="destList" md={{span:4, offset: 4}} hidden={sourcePlaylist === ""}>
+                <Col id="destList" md={{span:4, offset: 4}}>
                     <PlaylistList playlists={playlists} 
                         srcPlaylist={sourcePlaylist} 
                         setSrc={setSource} 
                         setDest={setDestination}
                         destPlaylists={destinationPlaylists} 
                         isSourceList={false}></PlaylistList>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <ClearPlaylistsButton srcClick={setSource} destClick={setDestination}></ClearPlaylistsButton> 
+                </Col>
+                <Col> 
+                    <SendPlaylistsButton
+                        srcPlaylist={sourcePlaylist} 
+                        destPlaylists={destinationPlaylists}></SendPlaylistsButton>
                 </Col>
             </Row>
         </Container>
