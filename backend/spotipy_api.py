@@ -45,23 +45,35 @@ def get_song_ids_from_playlist(playlist_id: str):
 FEATURES = ['danceability', 'energy', 'loudness', 'speechiness', 'acousticness', 'instrumentalness', 'liveness', 'valence', 'tempo', 'key']
 def get_audio_features_from_playlist(playlist_id: str):
     song_ids = get_song_ids_from_playlist(playlist_id)
-    playlist_features = [playlist_id]
+    playlist_features = []
     limit, offset = 100, 0
     tracks_audio_features = sp.audio_features(song_ids[:limit])
-    while len(song_ids) > len(playlist_features) - 1:
+    while len(song_ids) > len(playlist_features):
         for track in tracks_audio_features:
             track_features = []
             for feature in FEATURES:
                 track_features.append(track[feature])
-            playlist_features.append(track_features)
+            playlist_features.append((track['id'], track_features))
         offset += limit
         tracks_audio_features = sp.audio_features(song_ids[offset:offset+limit])
+    # every element is the (song id, features) of the song
     return playlist_features
 
+def get_track_data(song_id: str):
+    """
+    @return (song_id, song name, and artists)
+    """
+    song_data = sp.track(song_id)
+    return (song_id, song_data['name'], song_data['artists'][0]['name'])
 
-# if len(sys.argv) > 1:
-#     print(get_audio_features_from_playlist(sys.argv[1]))
-# else:
-#     print("Whoops, need a username!")
-#     print("usage: python user_playlists.py [username]")
-#     sys.exit()
+def get_playlist_data(playlist_id: str):
+    """
+    @return (playlist id, playlist name)
+    """
+    playlist_data = sp.playlist(playlist_id)   
+    return (playlist_id, playlist_data['name']) 
+
+# print(get_track_data("5nEF9aioHwgov5UbhTRMg4"))
+# print(get_playlist_data("3YqslVWmv4OGMhDZmfv1Nq"))
+
+

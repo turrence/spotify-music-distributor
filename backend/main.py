@@ -2,8 +2,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from schemas import Source_Destinations
-from spotipy_wrapper import get_user_playlists
-import json
+from spotipy_api import get_user_playlists
+from sklearn_api import make_model
+import json, copy
 
 app = FastAPI()
 
@@ -17,8 +18,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-
 @app.get("/")
 async def root():
     return {"message" : "Hello World"}
@@ -29,5 +28,18 @@ def get_all_playlist_ids():
 
 @app.post("/playlists/source_destinations")
 def receive_source_destination_playlists(src_dests: Source_Destinations):
-    print(src_dests)
+    """
+    create an sklearn model 
+    for every song from the source playlist from above
+    @return [{
+        song name, 
+        artist name, 
+        source playlist id, 
+        source playlist name, 
+        destination playlist id,
+        destination playlist name
+        },...]
+    """
+    model = make_model(src_dests.destinations)
+    song_ids_classifications = classify_songs(model, src_dests.source)
     return src_dests
