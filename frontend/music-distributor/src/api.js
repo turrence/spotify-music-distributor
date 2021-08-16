@@ -13,11 +13,12 @@ export async function get_playlists(){
 }
 
 export async function send_source_destination_playlists(data){
-    await axios.post(host + "playlists/source_destinations", data)
+    const response = await axios.post(host + "playlists/source_destinations", data)
         .then((promise) => {
             console.log(promise);
             return promise.data;
         }).catch(error => {
             console.error(error)
         });
+    return response
 }

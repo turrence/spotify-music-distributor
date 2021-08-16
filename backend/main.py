@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from schemas import Source_Destinations
 from spotipy_api import get_user_playlists
-from sklearn_api import make_model
+from sklearn_api import make_model, classify_songs
 import json, copy
 
 app = FastAPI()
@@ -42,4 +42,4 @@ def receive_source_destination_playlists(src_dests: Source_Destinations):
     """
     model = make_model(src_dests.destinations)
     song_ids_classifications = classify_songs(model, src_dests.source)
-    return src_dests
+    return song_ids_classifications
