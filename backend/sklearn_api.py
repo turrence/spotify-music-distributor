@@ -1,7 +1,7 @@
 import sys 
 
 from sklearn.neighbors import KNeighborsClassifier
-from spotipy_api import get_audio_features_from_playlist, get_song_ids_from_playlist, get_track_data, get_playlist_data
+from spotipy_api import get_audio_features_from_playlist, get_song_ids_from_playlist, get_tracks_data, get_playlist_data
 
 def make_model(playlists: list):
     model_audio_features = []
@@ -27,18 +27,18 @@ def classify_songs(model: KNeighborsClassifier, playlist_id: str):
         
 def organize_song_data(song_infos: list):
     """
-    @param: [(song ids, source, playlistpredictiondestination)]
+    @param: [(song ids, source, playlist_prediction_destination)]
     @return [see code below]
     """
     sum_data = []
+    tracks_information = get_tracks_data([s[0] for s in song_infos])
     for song_data_prediction in song_infos:
-        more_info = get_track_data(song_data_prediction[0])
         src_playlist_info = get_playlist_data(song_data_prediction[1])
         dest_playlist_info = get_playlist_data(song_data_prediction[2])
         data_entry = {
             "song_id" : song_data_prediction[0],
-            "song_name" : more_info[1],
-            "artist_name": more_info[2],
+            "song_name" : tracks_information[song_data_prediction[0]][0],
+            "artist_name": tracks_information[song_data_prediction[0]][1],
             "source_playlist_id": song_data_prediction[1],
             "source_playlist_name" : src_playlist_info[1],
             "destination_playlist_id": song_data_prediction[2],

@@ -14,13 +14,11 @@ function PlaylistListContainer({ playlists }) {
     function setSource(playlistId){
         setSourcePlaylist(playlistId)
         console.log("src: " + sourcePlaylist)
-        console.log(sourcePlaylist === "" && destinationPlaylists.length === 0)
     }
 
     function setDestination(playlistIds){
         setDestinationPlaylists(playlistIds)
         console.log("dest: " + destinationPlaylists)
-        console.log(sourcePlaylist === "" && destinationPlaylists.length === 0)
     }
 
     return (

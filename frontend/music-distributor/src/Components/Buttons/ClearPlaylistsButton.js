@@ -9,7 +9,6 @@ function ClearPlaylistsButton( { srcClick, destClick }){
 
     return (<Button variant="outline-danger" onClick={()=>clearOnClick()}>Clear Selection</Button>)
 
-
 }
 
 export default ClearPlaylistsButton;
