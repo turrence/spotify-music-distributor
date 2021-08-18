@@ -7,7 +7,6 @@ def make_model(playlists: list):
     model_audio_features = []
     classification_for_features = []
     for playlist in playlists:
-        # returns 
         audio_features = get_audio_features_from_playlist(playlist)
         model_audio_features += [af[1] for af in audio_features]
         classification_for_features += [playlist for i in range(len(audio_features))]
@@ -16,22 +15,30 @@ def make_model(playlists: list):
     return model
 
 
-def classify_songs(model: KNeighborsClassifier, playlist_id: str):
-    song_ids_audio_features = get_audio_features_from_playlist(playlist_id)
+def classify_songs(model: KNeighborsClassifier, src_playlist_id: str, dest_playlists_id: str):
+    song_ids_audio_features = get_audio_features_from_playlist(src_playlist_id)
     # tuple of (song ids, [audio features])
-    song_ids_audio_features = [(pair[0], playlist_id, model.predict([pair[1]])[0]) for pair in song_ids_audio_features]
+    song_ids_audio_features = [(pair[0], src_playlist_id, model.predict([pair[1]])[0]) for pair in song_ids_audio_features]
     # print (song ids, source_id, destination_id)
-    song_data_predictions = organize_song_data(song_ids_audio_features)
+    song_data_predictions = organize_song_data(song_ids_audio_features, dest_playlists_id)
     return song_data_predictions
     
         
-def organize_song_data(song_infos: list):
+def organize_song_data(song_infos: list, dest_playlists_id: list):
     """
     @param: [(song ids, source, playlist_prediction_destination)]
-    @return [see code below]
+    @return {
+        all_destinations: [list of tuples of all destination playlists (id, name)]
+        classifications: see dict below
+    }
     """
-    sum_data = []
+    sum_data = {}
+    all_dest_playlist = []
     tracks_information = get_tracks_data([s[0] for s in song_infos])
+    for dest_playlist in dest_playlists_id:
+        all_dest_playlist.append(get_playlist_data(dest_playlist))
+    sum_data['all_destinations'] = all_dest_playlist
+    sum_data['classifications'] = []
     for song_data_prediction in song_infos:
         src_playlist_info = get_playlist_data(song_data_prediction[1])
         dest_playlist_info = get_playlist_data(song_data_prediction[2])
@@ -44,7 +51,7 @@ def organize_song_data(song_infos: list):
             "destination_playlist_id": song_data_prediction[2],
             "destination_playlist_name" : dest_playlist_info[1],
         }
-        sum_data.append(data_entry)
+        sum_data['classifications'].append(data_entry)
     return sum_data
 
     

@@ -10,10 +10,13 @@ import AllToPlaylistButton from "./Buttons/AllToPlaylistButton"
 
 function SelectionTable(props) {
     // allSongs is required when the eventual ability to change the destination playlist
-    const [allSongs, setAllSongs] = useState([])
+    
     const [selectedSongs, setSelectedSongs] = useState([])
 
     const data = props.location.state || {}
+    let counter = 1
+
+    const [allSongs, setAllSongs] = useState(data.classifications.map(entry => {return [entry.song_id, entry.destination_playlist_id]}))
 
     return (
         <Container>
@@ -28,12 +31,14 @@ function SelectionTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((entry) => {
+                    {data.classifications.map((entry) => {
                         return (<SelectionRow
-                            key={entry.song_id}
+                            key={entry.song_id + counter++}
                             data={entry} 
+                            destPlaylists={data.all_destinations}
                             selectedSongs={selectedSongs} 
                             selectSongs={setSelectedSongs}
+                            allSongs={allSongs}
                             setAllSongs={setAllSongs}></SelectionRow>)
                     })}
                 </tbody>

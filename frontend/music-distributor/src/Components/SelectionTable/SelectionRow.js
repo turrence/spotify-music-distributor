@@ -1,7 +1,26 @@
 import React from 'react'
 import InputGroup from 'react-bootstrap/InputGroup'
+import Form from 'react-bootstrap/Form'
 
-function SelectionRow({data, selectedSongs, selectSongs, setAllSongs}) {
+function SelectionRow({data, destPlaylists, selectedSongs, selectSongs, allSongs, setAllSongs}) {
+    /* 
+        data = {
+            all_destinations: [list of tuples of all destination playlists (id, name)]
+            classifications: [list of all songs and sources and their data] 
+        }
+    */
+
+    let counter = 1
+
+    const handleOptionChange = (event) => {
+        let newAllSongs = allSongs.map(song_playlist => {
+            if (song_playlist[0] === data.song_id)
+                return [data.song_id, event.target.value]
+            else
+                return song_playlist
+        })
+        setAllSongs(newAllSongs)
+    }
 
     function rowSelection(data){
         let newSelectedSongs = [...selectedSongs]
@@ -18,13 +37,20 @@ function SelectionRow({data, selectedSongs, selectSongs, setAllSongs}) {
         selectSongs(newSelectedSongs)
     }
 
-    return (<tr onClick={() => rowSelection(data)}>
-        <td>{data.song_name}<br/><i>{data.song_id}</i></td>
-        <td>{data.artist_name}</td>
-        <td>{data.source_playlist_name}</td>
-        {/* this will eventually be a dropdown of all playlists that the user selected */}
-        <td>{data.destination_playlist_name}</td>
-        <td><InputGroup.Checkbox 
+    return (<tr>
+        <td onClick={() => rowSelection(data)}>{data.song_name}<br/><i>{data.song_id}</i></td>
+        <td onClick={() => rowSelection(data)}>{data.artist_name}</td>
+        <td onClick={() => rowSelection(data)}>{data.source_playlist_name}</td>
+        <td>
+            <Form.Control as="select" aria-label="options" onChange={handleOptionChange}>
+                <option value={data.destination_playlist_id}>{data.destination_playlist_name}</option>
+                {destPlaylists.map(id_name => {
+                    if (id_name[0] !== data.destination_playlist_id)
+                        return (<option value={id_name[0]}>{id_name[1]}</option>)
+                })}
+            </Form.Control>
+        </td>
+        <td onClick={() => rowSelection(data)}><InputGroup.Checkbox 
             aria-label="Selected" 
             checked={selectedSongs.map((song_playlist) => {
                 return song_playlist[0]

@@ -3,7 +3,10 @@ import spotipy
 import sys
 from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
+import traceback
+import pprint
 
+pp = pprint.PrettyPrinter(indent=4)
 SCOPES = "playlist-modify-public playlist-modify-private playlist-read-private"
 
 # check .env to see what environment variables are necessary
@@ -48,15 +51,22 @@ def get_audio_features_from_playlist(playlist_id: str):
     num_songs = len(song_ids)
     playlist_features = []
     limit, offset = 100, 0
-    tracks_audio_features = sp.audio_features(song_ids[:limit])
-    while num_songs > len(playlist_features):
-        for track in tracks_audio_features:
-            track_features = []
-            for feature in FEATURES:
-                track_features.append(track[feature])
-            playlist_features.append((track['id'], track_features))
+    try:
+        tracks_audio_features = sp.audio_features(song_ids[:limit])
+        while len(playlist_features) < num_songs:
+            for track in tracks_audio_features:
+                if track is not None:
+                    track_features = []
+                    for feature in FEATURES:
+                        track_features.append(track[feature])
+                    playlist_features.append((track['id'], track_features))
+                else:
+                    num_songs -= 1
         offset += limit
         tracks_audio_features = sp.audio_features(song_ids[offset:offset+limit])
+    except:
+        print("Error on get_audio_features_from_playlist playlist id: " + playlist_id)
+        traceback.print_exc()
     # every element is the (song id, [features]) of the song
     return playlist_features
 
@@ -81,6 +91,8 @@ def get_tracks_data(song_ids: list):
         for track in tracks_data['tracks']:
             if track['id'] not in songs_data:
                 songs_data[track['id']] = (track['name'], track['artists'][0]['name'])
+            else:
+                num_songs -= 1
         offset += limit
         if len(song_ids[offset:offset+limit]) > 0:
             tracks_data = sp.tracks(song_ids[offset:offset+limit])
