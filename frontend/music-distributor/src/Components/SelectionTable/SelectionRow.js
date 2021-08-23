@@ -10,8 +10,6 @@ function SelectionRow({data, destPlaylists, selectedSongs, selectSongs, allSongs
         }
     */
 
-    let counter = 1
-
     const handleOptionChange = (event) => {
         let newAllSongs = allSongs.map(song_playlist => {
             if (song_playlist[0] === data.song_id)
@@ -45,8 +43,9 @@ function SelectionRow({data, destPlaylists, selectedSongs, selectSongs, allSongs
             <Form.Control as="select" aria-label="options" onChange={handleOptionChange}>
                 <option value={data.destination_playlist_id}>{data.destination_playlist_name}</option>
                 {destPlaylists.map(id_name => {
-                    if (id_name[0] !== data.destination_playlist_id)
+                    if (id_name[0] !== data.destination_playlist_id){
                         return (<option value={id_name[0]}>{id_name[1]}</option>)
+                    }
                 })}
             </Form.Control>
         </td>

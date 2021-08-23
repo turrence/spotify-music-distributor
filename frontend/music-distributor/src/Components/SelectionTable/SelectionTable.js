@@ -9,13 +9,14 @@ import PlaylistSelectionButton from "./Buttons/PlaylistSelectionButton"
 import AllToPlaylistButton from "./Buttons/AllToPlaylistButton"
 
 function SelectionTable(props) {
-    // allSongs is required when the eventual ability to change the destination playlist
     
+    // list of tuples: [data.song_id, data.destination_playlist_id]
     const [selectedSongs, setSelectedSongs] = useState([])
 
     const data = props.location.state || {}
     let counter = 1
 
+    // list of tuples: [data.song_id, data.destination_playlist_id] 
     const [allSongs, setAllSongs] = useState(data.classifications.map(entry => {return [entry.song_id, entry.destination_playlist_id]}))
 
     return (

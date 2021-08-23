@@ -104,7 +104,15 @@ def get_playlist_data(playlist_id: str):
     @return (playlist id, playlist name)
     """
     playlist_data = sp.playlist(playlist_id)   
-    return (playlist_id, playlist_data['name']) 
+    return (playlist_id, playlist_data['name'])
+
+
+def add_songs_to_playlists(playlist_id: str, song_ids: list):
+    """
+    idk if i need a @return
+    """
+    sp.playlist_add_items(playlist_id, song_ids)
+
 
 # print(get_track_data("5nEF9aioHwgov5UbhTRMg4"))
 # print(get_tracks_data(["5nEF9aioHwgov5UbhTRMg4", "4FUDWkguOUVpLRAVn5C20z"]))

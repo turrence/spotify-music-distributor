@@ -5,12 +5,12 @@ import { get_playlists } from './api';
 import { PlaylistListContainer, SelectionTable } from './Components/components'
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-// import { CLASSIFIED_SONGS, SAMPLE_DATA_DICT} from './Components/data'
+import { CLASSIFIED_SONGS, PLAYLIST_LIST } from './Components/data'
 
 function App() {
     const [playlists , setPlaylists] = useState([]);
-    const [tempData, setTempData] = useState([])
     
+    // this could probably be moved to PlaylistListcontainer
     useEffect(() => {
         
         const api_get_playlists = async () => {
@@ -19,10 +19,9 @@ function App() {
         }
         
         // --------------------ACTUAL API CALL------------------
-        api_get_playlists(playlists);
+        // api_get_playlists(playlists);
         // -------------------FOR DEVELOPMENT--------------------
-        // setPlaylists(SAMPLE_DATA_DICT)
-        // setTempData(CLASSIFIED_SONGS)
+        setPlaylists(PLAYLIST_LIST)
         
     }, []);
     

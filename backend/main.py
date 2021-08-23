@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from schemas import Source_Destinations
+from schemas import Source_Destinations, Playlist_Songs_Container, Playlist_Songs
 from spotipy_api import get_user_playlists
 from sklearn_api import make_model, classify_songs
 import json, copy
@@ -29,8 +29,7 @@ def get_all_playlist_ids():
 @app.post("/playlists/source_destinations")
 def receive_source_destination_playlists(src_dests: Source_Destinations):
     """
-    create an sklearn model 
-    for every song from the source playlist from above
+    create an sklearn model for every song from the source playlist from above
     @return {
         all_destinations: [list of tuples of all destination playlists (id, name)]
         classifications: see dict below
@@ -40,3 +39,12 @@ def receive_source_destination_playlists(src_dests: Source_Destinations):
     model = make_model(src_dests.destinations)
     song_ids_classifications = classify_songs(model, src_dests.source, src_dests.destinations)
     return song_ids_classifications
+
+@app.post("/add_songs")
+def receive_songs_ids_and_dest_playlist_ids(data: Playlist_Songs_Container):
+    playlist_songs = data.items
+    for entry in playlist_songs:
+        # add_songs_to_playlists(entry.playlist_id, entry.song_ids)
+        print("playlist: " + entry.playlist_id + " songs: " + entry.song_ids)
+    return playlist_songs
+    

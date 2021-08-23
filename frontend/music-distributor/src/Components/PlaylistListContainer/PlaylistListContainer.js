@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import { PlaylistList, SendPlaylistsButton, ClearPlaylistsButton } from '../components'
+import { PlaylistList } from '../components'
+import SendPlaylistsButton from "./Buttons/SendPlaylistsButton"
+import ClearPlaylistsButton from "./Buttons/ClearPlaylistsButton"
 
 import './PlaylistListContainer.css';
 
