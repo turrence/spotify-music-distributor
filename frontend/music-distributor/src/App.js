@@ -1,30 +1,14 @@
-import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { get_playlists } from './api';
 import { PlaylistListContainer, SelectionTable } from './Components/components'
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import { CLASSIFIED_SONGS, PLAYLIST_LIST } from './Components/data'
+import Container from 'react-bootstrap/esm/Container';
+import Button from 'react-bootstrap/Button'
+import logo from './static/Spotify_Icon_RGB_White.png'
 
-function App() {
-    const [playlists , setPlaylists] = useState([]);
-    
-    // this could probably be moved to PlaylistListcontainer
-    useEffect(() => {
-        
-        const api_get_playlists = async () => {
-            const data = await get_playlists()
-            setPlaylists(data)
-        }
-        
-        // --------------------ACTUAL API CALL------------------
-        // api_get_playlists(playlists);
-        // -------------------FOR DEVELOPMENT--------------------
-        setPlaylists(PLAYLIST_LIST)
-        
-    }, []);
-    
+
+function App() {    
     return (
         <div className="App">
             <Router>
@@ -33,7 +17,7 @@ function App() {
                         <Home/>
                     </Route>
                     <Route path="/playlists">
-                        <PlaylistListContainer playlists={playlists}></PlaylistListContainer>
+                        <PlaylistListContainer></PlaylistListContainer>
                     </Route>
                     <Route path="/selection" component={SelectionTable}>
                     </Route>
@@ -45,14 +29,11 @@ function App() {
     
 const Home = () => {
     return (
-        <ul>
-            <li>
-                <Link to="/playlists">Playlist Selection</Link>
-            </li>
-            <li>
-                <Link to="/selection">Song Selection</Link>
-            </li>
-        </ul>
+        <Container>
+            <Button class="login-btn">
+                <img class="login-logo" src={logo} alt="" width="40"/>Login
+            </Button>
+        </Container>
         )
     }
         

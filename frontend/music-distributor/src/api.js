@@ -24,7 +24,7 @@ export async function send_source_destination_playlists(data){
 }
 
 export async function send_playlists_and_songs(data){
-    const response = await axios.post(host + "/add_songs", data)
+    const response = await axios.post(host + "add_songs/", data)
         .then((promise) => {
             console.log(promise);
             return promise.data;

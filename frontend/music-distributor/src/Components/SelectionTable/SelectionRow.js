@@ -36,7 +36,7 @@ function SelectionRow({data, destPlaylists, selectedSongs, selectSongs, allSongs
     }
 
     return (<tr>
-        <td onClick={() => rowSelection(data)}>{data.song_name}<br/><i>{data.song_id}</i></td>
+        <td onClick={() => rowSelection(data)}>{data.song_name}<br/>{/* <i>{data.song_id}</i> */}</td>
         <td onClick={() => rowSelection(data)}>{data.artist_name}</td>
         <td onClick={() => rowSelection(data)}>{data.source_playlist_name}</td>
         <td>

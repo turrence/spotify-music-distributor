@@ -17,7 +17,7 @@ function SendPlaylistsButton( { srcPlaylist, destPlaylists }){
             top: 0,
             behavior: "smooth"
         });
-        /* 
+        
         // --------------------ACTUAL API CALL------------------
         const data_request = {"source" : srcPlaylist, "destinations" : destPlaylists}
         // console.log("sending source and destination playlists: " + data_request)
@@ -25,23 +25,23 @@ function SendPlaylistsButton( { srcPlaylist, destPlaylists }){
         const classified_songs = async () => {
             setIsLoading(true)
             const data_response = await send_source_destination_playlists(data_request)
-            let path = "/selection"
+            const path = "/selection"
             history.push({
                 pathname: path,
                 state: data_response
             })
         }
-        classified_songs() */
+        classified_songs()
         
         // -------------------FOR DEVELOPMENT--------------------
         
-       const response = CLASSIFIED_SONGS
+    /*    const response = CLASSIFIED_SONGS
         
-        let path = "/selection"
+        const path = "/selection"
         history.push({
             pathname: path,
             state: response
-        })
+        }) */
     }
 
     

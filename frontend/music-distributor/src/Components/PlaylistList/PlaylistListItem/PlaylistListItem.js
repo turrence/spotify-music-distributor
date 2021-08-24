@@ -32,7 +32,7 @@ function PlaylistListItem({playlistData, srcPlaylist, setSrc, setDest, destPlayl
             variant={playlistData[1] === srcPlaylist ? "primary" : ""}
             onClick={() => sourceListOnClick(playlistData)}>
             {playlistData[0]}<br/>
-            {playlistData[1]}<br/>
+            {/* {playlistData[1]}<br/> */}
         </ListGroup.Item>)
     }
     else {
@@ -42,7 +42,7 @@ function PlaylistListItem({playlistData, srcPlaylist, setSrc, setDest, destPlayl
             disabled={srcPlaylist === ""}
             hidden={playlistData[1] === srcPlaylist}>
             {playlistData[0]}<br/>
-            {playlistData[1]}<br/>
+            {/* {playlistData[1]}<br/> */}
         </ListGroup.Item>)
     }
 }

@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button'
-import send_playlists_and_songs from "../../../api"
+import { send_playlists_and_songs } from "../../../api"
 
 const AllToPlaylistButton = ({ songs }) => {
 
@@ -26,8 +26,8 @@ const AllToPlaylistButton = ({ songs }) => {
                 "song_ids": value
             })
         }
-        console.log(payload)
-        // send_playlists_and_songs(payload)
+        // console.log(payload)
+        send_playlists_and_songs(payload)
     }
 
     return (<Button onClick={() => handleOnClick(songs)} variant="outline-secondary">Move ALL Source Songs to Destination Playlist</Button>)

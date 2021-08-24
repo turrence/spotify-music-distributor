@@ -114,7 +114,7 @@ def add_songs_to_playlists(playlist_id: str, song_ids: list):
     sp.playlist_add_items(playlist_id, song_ids)
 
 
-# print(get_track_data("5nEF9aioHwgov5UbhTRMg4"))
+print(get_track_data("5nEF9aioHwgov5UbhTRMg4"))
 # print(get_tracks_data(["5nEF9aioHwgov5UbhTRMg4", "4FUDWkguOUVpLRAVn5C20z"]))
 # print(get_playlist_data("3YqslVWmv4OGMhDZmfv1Nq"))
 

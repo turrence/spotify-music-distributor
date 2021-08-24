@@ -1,13 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from spotipy.oauth2 import SpotifyOAuth
+
 from schemas import Source_Destinations, Playlist_Songs_Container, Playlist_Songs
-from spotipy_api import get_user_playlists
+from spotipy_api import get_user_playlists, add_songs_to_playlists
 from sklearn_api import make_model, classify_songs
-import json, copy
+import json, copy, contextvars
 
 app = FastAPI()
-
 origins = ["http://localhost:3000"]
 
 app.add_middleware(
@@ -18,9 +19,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+spotify_client = None
+
 @app.get("/")
 async def root():
     return {"message" : "Hello World"}
+
+@app.get("/login")
+async def login():
+    SCOPES = "playlist-modify-public playlist-modify-private playlist-read-private"
+    oauth = SpotifyOAuth(scope = SCOPES, open_browser=True)
+
 
 @app.get("/playlists")
 def get_all_playlist_ids():
@@ -45,6 +54,8 @@ def receive_songs_ids_and_dest_playlist_ids(data: Playlist_Songs_Container):
     playlist_songs = data.items
     for entry in playlist_songs:
         # add_songs_to_playlists(entry.playlist_id, entry.song_ids)
-        print("playlist: " + entry.playlist_id + " songs: " + entry.song_ids)
+        print("playlist: " + entry.playlist_id + " songs: " + str(entry.song_ids))
     return playlist_songs
+
+
     
