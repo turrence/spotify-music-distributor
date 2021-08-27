@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const host = "http://127.0.0.1:8000/" 
 
-export async function get_playlists(){
-    const response = await axios.get(host + "playlists/")
+export async function get_playlists(data){
+    const response = await axios.get(host + "playlists/" + data)
         .then((promise) => {
             console.log(promise);
             return promise.data;
@@ -25,6 +25,17 @@ export async function send_source_destination_playlists(data){
 
 export async function send_playlists_and_songs(data){
     const response = await axios.post(host + "add_songs/", data)
+        .then((promise) => {
+            console.log(promise);
+            return promise.data;
+        }).catch(error => {
+            console.error(error)
+        });
+    return response
+}
+
+export async function get_login_url(){
+    const response = await axios.get(host + "login_url/")
         .then((promise) => {
             console.log(promise);
             return promise.data;

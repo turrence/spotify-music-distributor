@@ -3,18 +3,32 @@ import './App.css';
 import { PlaylistListContainer, SelectionTable } from './Components/components'
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { get_login_url } from "./api"
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button'
 import logo from './static/Spotify_Icon_RGB_White.png'
 
 
-function App() {    
+function App() {
+    const [loginURL, setLoginURL] = useState("")
+
+    useEffect(() => {
+        const request_login_url = async () => {
+            const response = await get_login_url()
+            setLoginURL(response.url)
+            return response
+        }
+
+        request_login_url()
+
+    }, [loginURL])
+
     return (
         <div className="App">
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        <Home/>
+                        <Home url={loginURL}/>
                     </Route>
                     <Route path="/playlists">
                         <PlaylistListContainer></PlaylistListContainer>
@@ -27,12 +41,14 @@ function App() {
         );
     }
     
-const Home = () => {
+const Home = ({ url }) => {
     return (
         <Container>
-            <Button class="login-btn">
-                <img class="login-logo" src={logo} alt="" width="40"/>Login
-            </Button>
+            <a href={url}>
+                <Button class="login-btn">
+                    <img class="login-logo" src={logo} alt="" width="40"/>Login
+                </Button>
+            </a>
         </Container>
         )
     }

@@ -19,9 +19,19 @@ function PlaylistListContainer() {
     const [isLoading, setIsLoading] = useState(true);
     
     useEffect(() => {
+
+        /* const format_url_params = () => {
+            const queryString = window.location.search
+            const urlParams = new URLSearchParams(queryString)
+            // should be code and state
+            return {
+                "code" : urlParams.get("code"),
+                "state" : urlParams.get("state")
+            }
+        } */
         
         const api_get_playlists = async () => {
-            const data = await get_playlists()
+            const data = await get_playlists(window.location.search)
             setPlaylists(data)
             setIsLoading(false)
         }
@@ -31,7 +41,7 @@ function PlaylistListContainer() {
         // -------------------FOR DEVELOPMENT--------------------
         // setPlaylists(PLAYLIST_LIST)
         
-    }, [...playlists]);
+    }, []);
 
     const [sourcePlaylist, setSourcePlaylist] = useState("")
     const [destinationPlaylists, setDestinationPlaylists] = useState([])
@@ -51,6 +61,7 @@ function PlaylistListContainer() {
             {isLoading ? <RollBoxLoading></RollBoxLoading> :
             <Row>
                 <Col id="srcList" md={4}>
+                    <b>Source Playlist</b><br/>
                     <PlaylistList playlists={playlists} 
                         srcPlaylist={sourcePlaylist} 
                         setSrc={setSource} 
@@ -58,7 +69,19 @@ function PlaylistListContainer() {
                         destPlaylists={destinationPlaylists} 
                         isSourceList={true}></PlaylistList>
                 </Col>
-                <Col id="destList" md={{span:4, offset: 4}}>
+                <Col md={4}>
+                    <ol class="description-text">
+                        <li>Select a <strong>source playlist</strong></li>
+                            <ul><li>songs from the source playlist will be categorized into selected destination playlists</li></ul>
+                        <li>Select <b>destination playlists</b></li>
+                            <ul>
+                                <li>songs from your source playlist will be sorted into these playlists</li>
+                                <li>you can change the destination of a song on the next page</li>
+                            </ul>
+                    </ol>
+                </Col>
+                <Col id="destList" md={4}>
+                    <b>Destination Playlists</b><br/>
                     <PlaylistList playlists={playlists} 
                         srcPlaylist={sourcePlaylist} 
                         setSrc={setSource} 
@@ -68,11 +91,11 @@ function PlaylistListContainer() {
                 </Col>
             </Row>
             }
-            <Row>
-                <Col>
+            <Row class="buttons" md={12}>
+                <Col md={4}>
                     <ClearPlaylistsButton srcClick={setSource} destClick={setDestination}></ClearPlaylistsButton> 
                 </Col>
-                <Col> 
+                <Col md={{size: 4, offset: 8}}> 
                     <SendPlaylistsButton
                         srcPlaylist={sourcePlaylist} 
                         destPlaylists={destinationPlaylists}></SendPlaylistsButton>
