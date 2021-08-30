@@ -1,0 +1,10 @@
+.playlist-card {
+    margin: 15px;
+    text-align: left;
+}
+
+.results-table {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;   
+}

@@ -8,6 +8,8 @@ import SongsToPlaylistButton from "./Buttons/SongsToPlaylistButton"
 import PlaylistSelectionButton from "./Buttons/PlaylistSelectionButton"
 import AllToPlaylistButton from "./Buttons/AllToPlaylistButton"
 
+import './SelectionTable.css'
+
 function SelectionTable(props) {
     
     // list of tuples: [data.song_id, data.destination_playlist_id]
@@ -46,15 +48,15 @@ function SelectionTable(props) {
             </Table>
             <Row>
                 <Col>
-                    {/* the only real data i need to send is the song_id and the destination playlist */}
-                    <SongsToPlaylistButton songs={selectedSongs}/>
+                    <PlaylistSelectionButton/>
                 </Col>
                 <Col>
                     {/* only real data is song_id and destination playlist */}
                     <AllToPlaylistButton songs={allSongs}/>
                 </Col>
                 <Col>
-                    <PlaylistSelectionButton/>
+                    {/* the only real data i need to send is the song_id and the destination playlist */}
+                    <SongsToPlaylistButton songs={selectedSongs}/>
                 </Col>
             </Row>
         </Container>

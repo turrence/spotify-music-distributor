@@ -47,5 +47,4 @@ function PlaylistListItem({playlistData, srcPlaylist, setSrc, setDest, destPlayl
     }
 }
 
-
 export default PlaylistListItem;

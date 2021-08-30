@@ -1,7 +1,10 @@
 import Button from 'react-bootstrap/Button'
 import { send_playlists_and_songs } from "../../../api"
+import { useHistory } from "react-router-dom"
 
 const AllToPlaylistButton = ({ songs }) => {
+
+    const history = useHistory()
 
     const handleOnClick =  (songs) => {
         let payload = {
@@ -27,7 +30,17 @@ const AllToPlaylistButton = ({ songs }) => {
             })
         }
         // console.log(payload)
-        send_playlists_and_songs(payload)
+        const redirect_receive_data = async () => {
+            const data = await send_playlists_and_songs(payload)
+            const path = "/results"
+
+            history.push({
+                pathname: path,
+                state: data
+            })
+        }
+
+        redirect_receive_data()
     }
 
     return (<Button onClick={() => handleOnClick(songs)} variant="secondary">Move ALL Source Songs to Destination Playlist</Button>)

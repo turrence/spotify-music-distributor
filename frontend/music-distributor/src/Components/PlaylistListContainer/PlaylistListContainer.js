@@ -79,6 +79,7 @@ function PlaylistListContainer() {
                                 <li>songs from your source playlist will be sorted into these playlists</li>
                                 <li>you can change the destination of a song on the next page</li>
                             </ul>
+                        <li>Submit and wait! It takes a few seconds to go through every song in the selected playlists</li>
                     </ol>
                 </Col>
                 <Col id="destList" md={4}>
@@ -95,10 +96,10 @@ function PlaylistListContainer() {
         </Container>
         <Container className="buttons">
             <Row>
+            <ClearPlaylistsButton srcClick={setSource} destClick={setDestination}></ClearPlaylistsButton> 
             <SendPlaylistsButton
                 srcPlaylist={sourcePlaylist} 
                 destPlaylists={destinationPlaylists}></SendPlaylistsButton>
-            <ClearPlaylistsButton srcClick={setSource} destClick={setDestination}></ClearPlaylistsButton> 
             </Row>
         </Container>
     </div>);

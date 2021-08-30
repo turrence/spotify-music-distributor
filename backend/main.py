@@ -66,7 +66,7 @@ def receive_source_destination_playlists(src_dests: Source_Destinations):
     create an sklearn model for every song from the source playlist from above
     @return {
         all_destinations: [list of tuples of all destination playlists (id, name)]
-        classifications: see dict below
+        classifications: see dict in classify songs
     }
     """
     global sp_client
@@ -77,13 +77,19 @@ def receive_source_destination_playlists(src_dests: Source_Destinations):
 
 @app.post("/add_songs")
 def receive_songs_ids_and_dest_playlist_ids(data: Playlist_Songs_Container):
+    """
+    @return {
+        playlist_name: [(song_name, song_id), ....]
+        ...
+    }
+    """
     global sp_client
     playlist_songs = data.items
     ret_dict = {}
     for entry in playlist_songs:
-        ret_dict = sp_client.add_songs_to_playlists(entry.playlist_id, entry.song_ids)
-        # print("playlist: " + entry.playlist_id + " songs: " + str(entry.song_ids))
-    return ret_dict
+        ret_dict.update(sp_client.add_songs_to_playlists(entry.playlist_id, entry.song_ids))
+    # sorts the dictionary by number of songs in the value for the sake of frontend aesthetic
+    return {k: v for k,v in sorted(ret_dict.items(),key= lambda x:len(x), reverse=True)}
 
 
     

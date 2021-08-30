@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { PlaylistListContainer, SelectionTable } from './Components/components'
+import { PlaylistListContainer, SelectionTable, ResultsTable } from './Components/components'
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { get_login_url } from "./api"
@@ -14,8 +14,6 @@ function App() {
     const [loginURL, setLoginURL] = useState("")
 
     useEffect(() => {
-        document.title = "Spotify Music Distributor"
-
         const request_login_url = async () => {
             const response = await get_login_url()
             setLoginURL(response.url)
@@ -38,6 +36,8 @@ function App() {
                     </Route>
                     <Route path="/selection" component={SelectionTable}>
                     </Route>
+                    <Route path="/results" component={ResultsTable}>
+                    </Route>
                 </Switch>
             </Router>
         </div>
@@ -48,7 +48,7 @@ const Home = ({ url }) => {
     return (
         <Container className="home">
             <div class="title-text">
-                <h1>Spotify Distributor</h1>
+                <h1>Spotify Classifier</h1>
                 <h2>Automate the distribution of songs to your other playlists, however you want</h2>
             </div>
             <img class="image1" src={image1}/>

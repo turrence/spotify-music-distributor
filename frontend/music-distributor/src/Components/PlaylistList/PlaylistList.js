@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlaylistListItem } from '../components'
+import PlaylistListItem from './PlaylistListItem/PlaylistListItem'
 import ListGroup from 'react-bootstrap/ListGroup'
 import './PlaylistList.css'
 

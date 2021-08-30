@@ -418,3 +418,56 @@ export const CLASSIFIED_SONGS = {
       "destination_playlist_name": "content happiness"
     }]
 }
+
+export const PLAYLISTS_SONGS = {
+    'new age angst': [
+        ['today is a gift', 'Beowülf'], 
+        ['Blu', 'Jon Bellion'], 
+        ['detest me', 'glaive'], 
+        ['I Miss The Future', 'Lost Kings'], 
+        ['Starlight', 'Wstdyth'], 
+        ['By My Side', 'Wstdyth'], 
+        ['Better Days', 'brody'], 
+        ['Comfortable', 'nomu.'], 
+        ['Goner', 'T Shan'], 
+        ["it'll be ok", 'karson'], 
+        ['I', 'ichika'], 
+        ['bloody valentine', 'Machine Gun Kelly'], 
+        ['Ready Yet - San Holo Remix', 'Sasha Alex Sloan'], 
+        ['First Time', 'ILLENIUM'], 
+        ['fuck this town', 'glaive'], 
+        ['Yellow Hearts', 'Ant Saunders'], 
+        ['CHARMANDER', 'Haarper'], 
+        ['FUCK THE CLUB (feat. GOLDN)', 'chillpill'], 
+        ['Ride With Me (feat. Kid Ink)', 'Tungevaag'], 
+        ['Broken Bricks - Madnap Remix', 'DROELOE']],
+    'content happiness': [
+        ["I've Been Waiting (w/ ILoveMakonnen & Fall Out Boy)", 'Lil Peep'], 
+        ['California (feat. Warren Hue)', '88rising'], 
+        ['what was the last thing u said', 'aldn'], 
+        ['Leave Me Alone', 'Bishu'], ['Butterflies', 'CRAY'],
+        ['Gone', 'dabl'], ['bad idea!', 'girl in red'], 
+        ['I Think...', 'Bladee'], 
+        ['Let You Down', 'Stonebank'], 
+        ['Sorry', 'Boys Choir'], 
+        ["I Think I'm OKAY (with YUNGBLUD & Travis Barker)", 'Machine Gun Kelly'], 
+        ['forget me too (feat. Halsey)', 'Machine Gun Kelly'], 
+        ["my ex's best friend (with blackbear)", 'Machine Gun Kelly'], 
+        ['California (feat. Jackson Wang & Warren Hue) - [Remix]', '88rising'], 
+        ['At My Worst', 'Pink Sweat$'], ['Дорадура', 'дора'], 
+        ['Wasted Worry', 'ZenAware'], 
+        ['Momentum', 'KRANE'], 
+        ['春を告げる', 'yama'], 
+        ['Faraway', 'Kulakostas'], 
+        ['Kaikai Kitan', 'Eve'], 
+        ['edamame (feat. Rich Brian)', 'bbno$'], 
+        ['I Feel Bad', 'I Hate Myself Because'], 
+        ['1984', 'glaive'], 
+        ['shy', 'templuv'], 
+        ['Dream Chaser', 'kZm'], 
+        ['Fck Me', 'I Hate Myself Because']],
+    'vibin alone': [
+        ['marrow', 'blackwinterwells'], 
+        ['good 4 u', 'Olivia Rodrigo'], 
+        ['pink lemonade', 'guardin']]
+}
