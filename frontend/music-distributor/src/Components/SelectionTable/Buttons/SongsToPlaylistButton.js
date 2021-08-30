@@ -31,7 +31,7 @@ const SongsToPlaylistButton = ({ songs }) => {
     }
 
     return (<Button onClick={() => handleOnClick(songs)}
-            variant="outline-primary" 
+            variant="primary" 
             disabled={songs.length === 0}>Move Selected Songs to Destination Playlist
         </Button>)
 }

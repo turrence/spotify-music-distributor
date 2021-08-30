@@ -112,9 +112,14 @@ class Spotipy_API:
 
     def add_songs_to_playlists(self, playlist_id: str, song_ids: list):
         """
-        idk if i need a @return
+        @return {playlist_name: [list of playlist songs]}
         """
-        self.sp.playlist_add_items(playlist_id, song_ids)
+        playlist_name = self.get_playlist_data(playlist_id)[1]
+        songs_data = self.get_tracks_data(song_ids)
+        # self.sp.playlist_add_items(playlist_id, song_ids)
+        ret_dict = {playlist_name: [v[0] for v in songs_data.values()]}
+        print(ret_dict)
+        return ret_dict
 
 
 # print(get_track_data("5nEF9aioHwgov5UbhTRMg4"))

@@ -7,10 +7,12 @@ def make_model(sp: Spotipy_API, playlists: list):
     model_audio_features = []
     classification_for_features = []
     for playlist in playlists:
+        print("gathering song audio features for playlist: ", playlist)
         audio_features = sp.get_audio_features_from_playlist(playlist)
         model_audio_features += [af[1] for af in audio_features]
         classification_for_features += [playlist for i in range(len(audio_features))]
     model = KNeighborsClassifier(n_neighbors=5)
+    print("building model from playlists: ", playlists)
     model.fit(model_audio_features, classification_for_features)
     return model
 
@@ -18,6 +20,7 @@ def make_model(sp: Spotipy_API, playlists: list):
 def classify_songs(sp: Spotipy_API, model: KNeighborsClassifier, src_playlist_id: str, dest_playlists_id: str):
     song_ids_audio_features = sp.get_audio_features_from_playlist(src_playlist_id)
     # tuple of (song ids, [audio features])
+    print("fitting songs from playlist_id: %s into model created from playlist_ids: %s" % (src_playlist_id, dest_playlists_id))
     song_ids_audio_features = [(pair[0], src_playlist_id, model.predict([pair[1]])[0]) for pair in song_ids_audio_features]
     # print (song ids, source_id, destination_id)
     song_data_predictions = organize_song_data(sp, song_ids_audio_features, dest_playlists_id)

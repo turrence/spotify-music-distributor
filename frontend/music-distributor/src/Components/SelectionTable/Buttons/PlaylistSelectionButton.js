@@ -8,7 +8,7 @@ const PlaylistSelectionButton = () => {
         history.push("/playlists")
     }
 
-    return (<Button variant="outline-info" onClick={() => handleClick()}>Select NEW Source and Destination Playlists</Button>)
+    return (<Button variant="danger" onClick={() => handleClick()}>Select NEW Source and Destination Playlists</Button>)
 }
 
 export default PlaylistSelectionButton;

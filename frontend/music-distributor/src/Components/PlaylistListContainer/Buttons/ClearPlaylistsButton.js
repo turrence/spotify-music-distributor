@@ -7,7 +7,9 @@ function ClearPlaylistsButton( { srcClick, destClick }){
         destClick([])
     }
 
-    return (<Button variant="outline-danger" onClick={()=>clearOnClick()}>Clear Selection</Button>)
+    return (<div className="clear-playlists">
+        <Button variant="danger" onClick={()=>clearOnClick()}>Clear Selection</Button>
+    </div>)
 
 }
 

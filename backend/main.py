@@ -79,10 +79,11 @@ def receive_source_destination_playlists(src_dests: Source_Destinations):
 def receive_songs_ids_and_dest_playlist_ids(data: Playlist_Songs_Container):
     global sp_client
     playlist_songs = data.items
+    ret_dict = {}
     for entry in playlist_songs:
-        # sp_client.add_songs_to_playlists(sp_client, entry.playlist_id, entry.song_ids)
-        print("playlist: " + entry.playlist_id + " songs: " + str(entry.song_ids))
-    return playlist_songs
+        ret_dict = sp_client.add_songs_to_playlists(entry.playlist_id, entry.song_ids)
+        # print("playlist: " + entry.playlist_id + " songs: " + str(entry.song_ids))
+    return ret_dict
 
 
     

@@ -1,5 +1,14 @@
+html, body {
+    background-color:beige;
+}
+
+h1 {
+    text-align: center;
+}
+
 .App {
   text-align: center;
+  background-color:beige;
 }
 
 .App-logo {
@@ -37,6 +46,51 @@
   }
 }
 
+.title-text {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.home {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+
+.image1 {
+    box-shadow: 5px 5px 5px #999;
+    width: 60%;
+    margin: 10px;
+}
+.image-text1 {
+    width: 25%;
+}
+
+.middle-text {
+    width: 100%;
+    padding: 20px;
+}
+
+.image-table {
+    box-shadow: 5px 5px 5px #999;
+    width: 60%;
+    margin: 10px;
+}
+
+.table-caption {
+    width: 30%;
+}
+
+.login-btn {
+    margin: 15px;
+}
+
+.login-div {
+    padding: 20px;
+    width: 100%;
+}
+
 .login-logo {
-    padding: 5px;
+    padding: 10px;
 }

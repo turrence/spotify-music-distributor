@@ -57,7 +57,8 @@ function PlaylistListContainer() {
     }
 
     return (
-        <Container>
+    <div>
+        <Container className="playlist-list">
             {isLoading ? <RollBoxLoading></RollBoxLoading> :
             <Row>
                 <Col id="srcList" md={4}>
@@ -91,18 +92,16 @@ function PlaylistListContainer() {
                 </Col>
             </Row>
             }
-            <Row class="buttons" md={12}>
-                <Col md={4}>
-                    <ClearPlaylistsButton srcClick={setSource} destClick={setDestination}></ClearPlaylistsButton> 
-                </Col>
-                <Col md={{size: 4, offset: 8}}> 
-                    <SendPlaylistsButton
-                        srcPlaylist={sourcePlaylist} 
-                        destPlaylists={destinationPlaylists}></SendPlaylistsButton>
-                </Col>
+        </Container>
+        <Container className="buttons">
+            <Row>
+            <SendPlaylistsButton
+                srcPlaylist={sourcePlaylist} 
+                destPlaylists={destinationPlaylists}></SendPlaylistsButton>
+            <ClearPlaylistsButton srcClick={setSource} destClick={setDestination}></ClearPlaylistsButton> 
             </Row>
         </Container>
-    );
+    </div>);
 }
 
 export default PlaylistListContainer;

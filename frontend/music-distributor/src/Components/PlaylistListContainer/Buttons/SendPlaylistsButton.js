@@ -46,10 +46,10 @@ function SendPlaylistsButton( { srcPlaylist, destPlaylists }){
 
     
     return (
-        <div>
+        <div className="send-playlists">
             {isLoading ? <BlockReserveLoading></BlockReserveLoading> : 
                 <Button disabled={srcPlaylist === "" || destPlaylists.length === 0} 
-                onClick={() => sendOnClick()} variant="outline-primary">Submit Source Songs and Destination Playlists</Button>}
+                onClick={() => sendOnClick()} variant="primary">Submit Source Songs and Destination Playlists</Button>}
         </div>)
         
 }

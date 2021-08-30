@@ -30,7 +30,7 @@ const AllToPlaylistButton = ({ songs }) => {
         send_playlists_and_songs(payload)
     }
 
-    return (<Button onClick={() => handleOnClick(songs)} variant="outline-secondary">Move ALL Source Songs to Destination Playlist</Button>)
+    return (<Button onClick={() => handleOnClick(songs)} variant="secondary">Move ALL Source Songs to Destination Playlist</Button>)
 }
 
 export default AllToPlaylistButton;
