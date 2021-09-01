@@ -22,7 +22,7 @@ def classify_songs(sp: Spotipy_API, model: KNeighborsClassifier, src_playlist_id
     # tuple of (song ids, [audio features])
     print("fitting songs from playlist_id: %s into model created from playlist_ids: %s" % (src_playlist_id, dest_playlists_id))
     song_ids_audio_features = [(pair[0], src_playlist_id, model.predict([pair[1]])[0]) for pair in song_ids_audio_features]
-    # print (song ids, source_id, destination_id)
+    print("finished classifying, formatting data....")
     song_data_predictions = organize_song_data(sp, song_ids_audio_features, dest_playlists_id)
     return song_data_predictions
     
@@ -42,8 +42,10 @@ def organize_song_data(sp: Spotipy_API, song_infos: list, dest_playlists_id: lis
         all_dest_playlist.append(sp.get_playlist_data(dest_playlist))
     sum_data['all_destinations'] = all_dest_playlist
     sum_data['classifications'] = []
+    src_playlist_info = None
     for song_data_prediction in song_infos:
-        src_playlist_info = sp.get_playlist_data(song_data_prediction[1])
+        if src_playlist_info is None:
+            src_playlist_info = sp.get_playlist_data(song_data_prediction[1])
         dest_playlist_info = sp.get_playlist_data(song_data_prediction[2])
         data_entry = {
             "song_id" : song_data_prediction[0],

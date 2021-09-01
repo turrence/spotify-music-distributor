@@ -29,6 +29,7 @@ cache/
 .cache*
 /venv
 /env
+/logs
 .env
 run
 log.txt
